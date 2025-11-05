@@ -1,0 +1,285 @@
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{baskervaldx} % Elegant serif font
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{mwe} % for placeholder images
+\usepackage{enumitem}
+
+% --- Colors ---
+\definecolor{navy}{HTML}{2C3E6C}
+
+% --- Section Styling ---
+\titleformat{\section}{\normalfont\Large\bfseries\color{navy}}{}{0pt}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{navy}}{}{0pt}{}
+
+\onehalfspacing
+
+% --- Header/Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{navy}{\small Swan Teleco: Customer Retention Analysis}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- Title info ---
+\title{\textbf{Swan Teleco: Customer Retention Analysis}}
+\author{Team Churners}
+\date{November 2025}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+
+% --- Title Page ---
+\begin{titlepage}
+    \centering
+    \vfill
+    \vspace{2cm}
+    {\Huge\bfseries Swan Teleco - Customer Retention Analysis \par}
+\vspace{2mm}
+    {\Large Team Churners:\par}
+    {\large Daniel Bacon, Jacob Hubbard, Hena Naeem, Kiril Vinogradov\par}
+\vspace{2mm}
+    {\large November 2025 \par}
+\vfill
+    {\color{navy}\rule{0.8\textwidth}{1pt}\par}
+    \includegraphics[width=0.8\textwidth]{logo.jpg} \\ % Default placeholder image
+    {\color{navy}\rule{0.8\textwidth}{1pt}\par}
+\vspace{2cm}
+\vfill
+    % --- Objectives & Scope Section on Title Page ---
+    \raggedright
+    \textbf{Dataset:} Single Customer View (Q3 2025)\\
+    \textbf{Deliverables:}\\
+    \hspace*{1em}- List of 500 customers at highest churn risk.\\
+    \hspace*{1em}- Churn probability scores for all customers.\\
+    \hspace*{1em}- Incentive recommendation to reduce churn.\\[0.5em]
+    \textbf{Key Questions:}\\
+    \hspace*{1em}- Who is churning and why?\\
+    \hspace*{1em}- What factors make customers stay?\\
+    \hspace*{1em}- Which sign-up metric should be incentivised?\\
+    \hspace*{1em}- Which customers should receive retention mailers?
+\end{titlepage}
+
+% ==============================================================
+
+\section*{1. Who is Churning and Why?}
+
+This section explores the customer characteristics and product attributes most associated with churn, highlighting key demographic, contractual, and behavioural factors influencing retention.
+
+\begin{center}
+\includegraphics[width=0.65\textwidth]{who1.png}\\
+\textit{Image 1: Relationship between Demographic Variables and Churn}
+\end{center}
+
+The demographic analysis reveals that \textbf{gender has little impact} on churn, suggesting that both male and female customers behave similarly in terms of retention. However, \textbf{Senior Citizens are significantly more likely to churn}, with churn rates nearly double those of younger customers. Conversely, customers with \textbf{partners or dependents} exhibit much stronger loyalty.
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{who2.png}\\
+\textit{Image 2: Churn Rate by Internet, Contract, and Payment Features}
+\end{center}
+
+A consistent theme across the analysis is that the customers most likely to churn are those who value \textbf{flexibility}. Customers on \textit{month-to-month} contracts, using \textit{electronic billing}, and subscribing to \textit{fiber optic} services demonstrate the highest churn rates. These individuals tend to prioritise convenience and short-term control over long-term commitment, making them more responsive to competitive offers and more willing to switch providers. While flexibility attracts new customers, it also lowers switching costs and weakens loyalty. This suggests that Swan’s most at-risk segment consists of high-speed, digitally active customers who prefer minimal contractual obligation.\\
+
+\begin{table}[H]
+\centering
+\caption{Churn Rates by Service Features}
+\label{tab:churn_features}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lccc}
+\hline
+\textbf{Feature} & \textbf{Churn \% (Yes)} & \textbf{Churn \% (No)} & \textbf{$\Delta$ \% (Yes - No)} \\
+\hline
+Streaming TV & 30.07 & 24.33 & +5.74 \\
+Streaming Movies & 29.94 & 24.38 & +5.56 \\
+Multiple Lines & 28.61 & 25.02 & +3.59 \\
+Phone Service & 26.71 & 24.93 & +1.78 \\
+Device Protection & 22.50 & 28.65 & -6.15 \\
+Online Backup & 21.53 & 29.17 & -7.64 \\
+Tech Support & 15.17 & 31.19 & -16.02 \\
+Online Security & 14.61 & 31.33 & -16.72 \\
+\hline
+\end{tabular}
+\end{table}
+
+Service add-ons also play a major role in retention. Customers with \textit{Online Security}, \textit{Tech Support}, \textit{Online Backup}, or \textit{Device Protection} are significantly less likely to churn, showing reductions in churn rates of up to 17\% compared with non-subscribers. These add-ons likely create stronger perceived value, greater technical reliance, and a sense of commitment to the service. In contrast, entertainment-based products such as \textit{Streaming TV} and \textit{Streaming Movies} offer little protective effect, indicating that convenience services do not translate directly into loyalty.\\[1em]
+
+\begin{center}
+\includegraphics[width=1\textwidth]{tenure.png}\\
+\textit{Image 3: Churn Rate by Tenure (Months of Service)}
+\end{center}
+
+Tenure is another defining factor. Churn risk is highest during the first few months of a customer’s relationship, declining sharply afterwards. This pattern suggests that \textbf{early-stage experience and onboarding quality} are critical determinants of long-term retention. Customers who remain beyond their first month are significantly less likely to churn, highlighting a key window for engagement and service reinforcement.\\[1em]
+
+\begin{center}
+\includegraphics[width=1\textwidth]{13threason.png}\\
+\textit{Image 4: Reasons for Customers Churning}
+\end{center}
+
+Reported churn reasons further support these findings. The top causes include the \textit{attitude of support staff}, \textit{competitors offering higher download speeds or more data}, and \textit{better competitor offers overall}. These patterns reinforce that many customers leave not only for lower prices, but because competitors deliver a smoother experience or stronger perceived value. Addressing this through better-trained support teams, improved service reliability and performance, will greatly strengthen loyalty and reduce churn.\\
+
+\textbf{Summary:} 
+Churn is concentrated among customers who prioritise flexibility - those on month-to-month contracts, using electronic billing, and opting for high-speed fiber optic services. These customers value convenience but exhibit lower long-term commitment, making them more vulnerable to competitive offers. In contrast, customers who commit to longer contracts, maintain higher tenure, and adopt service add-ons such as Online Security or Tech Support demonstrate substantially greater loyalty. Overall, churn is driven by short tenure, limited product engagement, and service dissatisfaction, while retention is strengthened through deeper product adoption, longer relationships, and reliable customer support.
+
+\newpage
+% ==============================================================
+\section*{2. Predictive Model \& Risk Targeting}
+
+To predict churn, we tested a Random Forest, Logistic Regression, and Support Vector Machine (SVM) model. Since the goal was to identify customers \textit{at risk of leaving}, we prioritised \textbf{recall} to minimise false negatives - ensuring fewer churners were missed.
+
+Both Random Forest and Logistic Regression achieved similar accuracy (\textasciitilde80\%) and ROC AUC (\textasciitilde85\%). ROC AUC measures how well your model distinguishes between churners and non-churners across all possible classification thresholds. However, recall was initially low, so we lowered both of the thresholds from 0.5 to 0.3. This improved recall substantially (see Appendix, Table 3), producing a more sensitive churn detection model suitable for retention targeting.
+
+\vspace{2em}
+\noindent\textbf{Model:} Random Forest Classifier (Threshold = 0.3)\\
+\textbf{Performance:} Accuracy 76.2\%, Recall 77.3\%, Precision 55.9\%, F1-Score 64.9\%, ROC AUC 85.5\%.\\[0.3em]
+
+\begin{table}[H]
+\centering
+\caption{Top Predictors of Customer Churn (Random Forest Model, Threshold = 0.3)}
+\label{tab:feature_importance}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{|l|p{6.5cm}|c|}
+\hline
+\textbf{Feature} & \textbf{Description} & \textbf{Importance} \\
+\hline
+Tenure (Months) & Length of customer relationship & 0.1835 \\
+Total Charges & Total amount billed historically & 0.1623 \\
+Monthly Charges & Current monthly bill amount & 0.1081 \\
+Internet Service: Fiber Optic & Fiber optic users churn more often & 0.0704 \\
+Contract: Two Year & Longer contracts reduce churn & 0.0634 \\
+Dependents & Customers with dependents less likely to churn & 0.0570 \\
+Payment: Electronic Check & Higher churn likelihood with this method & 0.0544 \\
+Online Security & Reduces churn risk & 0.0299 \\
+Contract: One Year & Moderately reduces churn & 0.0270 \\
+Tech Support & Reduces churn likelihood & 0.0267 \\
+\hline
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Interpretation:}\\
+The model confirms key trends identified in the EDA. Short-tenure and lower total-charge customers are the most likely to churn, highlighting early retention as critical. Fiber optic users show the highest churn rates, suggesting product or pricing dissatisfaction within this segment. Conversely, customers on longer contracts or with add-on services such as Online Security and Tech Support are significantly more loyal, reinforcing the value of deeper service engagement. Payment by electronic check remains a strong indicator of churn risk, potentially reflecting lower digital adoption or weaker brand attachment. These insights directly inform retention strategy - prioritising new, fiber-optic, and high-bill customers for early engagement.
+
+
+\newpage
+% =============================================================
+
+
+\section*{3. Required Deliverables}
+
+\textbf{1. Incentivise Add-On Adoption}\\
+Customers who subscribe to add-on services such as \textit{Online Security} or \textit{Tech Support} are up to 17\% less likely to churn. These features create perceived value and product stickiness. We recommend offering a \textbf{\$2.50 incentive for every Tech Support sign-up} to the new customer acquisition team.\\
+
+\textbf{2. Target At-Risk Segments}\\
+Use the \textbf{Top 500 customers likely to churn list} provided for the mailing project.
+These customers were selected via the \textit{Random Forest} model and, on average, were \textbf{single}, had \textbf{no dependents}, were on \textbf{month-to-month contracts}, used \textbf{fiber optic services}, and paid via \textbf{electronic check}.\\
+
+\subsection{Additional Suggestions}
+\vspace{0.5em}
+
+\begin{enumerate}[label=\roman*.]
+    \item \textbf{Strengthen Early Lifecycle Experience} \\
+    Improve onboarding processes and engagement during the first month - the period with the highest churn risk.
+
+    \item \textbf{Improve Perceived Value Against Competitors} \\
+    Highlight superior network reliability, customer service, and bundled offers to counter competitive switching.
+
+    \item \textbf{Enhance Customer Support Training} \\
+    Address the most common churn driver by investing in empathy training, first-call resolution, and consistent follow-up.
+\end{enumerate}
+
+
+\newpage
+% ==============================================================
+
+\section*{Appendix}
+
+\vspace{1cm}
+\subsection*{Model Evaluation}
+
+\begin{table}[ht]
+\centering
+\caption{Model Performance Summary}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{cllcccccc}
+\toprule
+\textbf{\#} & \textbf{Model Type} & \textbf{Threshold} & \textbf{Accuracy} & \textbf{Recall} & \textbf{Precision} & \textbf{F1-Score} & \textbf{ROC AUC} \\
+\midrule
+1 & Random Forest & 0.5 & 0.8034 & 0.5450 & 0.6965 & 0.6115 & 0.8551 \\
+2 & Random Forest & 0.3 & 0.7622 & 0.7725 & 0.5588 & 0.6485 & 0.8551 \\
+3 & Logistic Regression & 0.5 & 0.8027 & 0.5775 & 0.6794 & 0.6243 & 0.8539 \\
+4 & Logistic Regression & 0.3 & 0.7658 & 0.7600 & 0.5651 & 0.6482 & 0.8539 \\
+5 & Support Vector Machine & n/a & 0.8084 & 0.5475 & 0.7110 & 0.6186 & 0.7296 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\vspace{2cm}
+\subsection*{CSV Field Descriptions}
+
+\begin{table}[H]
+\centering
+\caption{CSV Field Descriptions for Project Deliverables}
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l l p{8cm}}
+\hline
+\textbf{File} & \textbf{Field} & \textbf{Description} \\
+\hline
+\texttt{top\_500\_customers.csv} 
+& customer\_id 
+& Unique identifier for customers predicted to be at highest churn risk. \\
+
+\texttt{customer\_churn\_risk.csv} 
+& customer\_id 
+& Unique customer identifier. \\
+& churn\_risk 
+& Predicted churn probability from Random Forest model (range: 0–1). \\
+
+\hline
+\end{tabular}
+}
+\end{table}
+\newpage
+\subsection*{High-Value Customers}
+
+Not all customers who churn have equal financial impact.  
+To identify which losses matter most, we estimated each customer’s \textbf{lifetime value (LTV)} as their monthly charges multiplied by their tenure. Among churned customers, the top 10\% by lifetime value were classified as \textbf{high-value churners}.  
+
+\begin{table}[H]
+\centering
+\caption{Summary of High-Value Churners}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Total Estimated Lifetime Value Lost to Churn & £2,862,577 \\
+High-Value Threshold (Top 10\%) & £4,597 \\
+Number of High-Value Churners & 187 \\
+Total Lifetime Value of High-Value Churners & £1,123,770 \\
+Share of Total Churned Lifetime Value & 39.3\% \\
+\hline
+\end{tabular}
+\end{table}
+
+These customers represent just one in ten churned accounts but contribute nearly 40\% of total revenue lost to churn - indicating that retention efforts focused here will have the greatest financial return.  
+
+\begin{center}
+\includegraphics[width=1\textwidth]{output.png}\\
+\textit{Image 5: Customer Retention Opportunity Matrix (\% of Customers by Value and Risk)}
+\end{center}
+
+The \textit{High Value / High Risk} quadrant identifies Swan Teleco’s most critical segment. These \textbf{1.1\% of customers} represent the greatest retention opportunity - a focused effort here would preserve around \textbf{20\% of total revenue lost due to High Risk customers}.
+
+\end{document}
